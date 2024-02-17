@@ -1,4 +1,11 @@
-dwonloading master ------------------------------------------creating repository
+
+swapoff -a
+sentforce 0
+yum install docker -y
+systemctl enable docker
+systemctl start docker
+
+dwonloading k8s in both master & node ------------------------------------------
 
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -10,7 +17,34 @@ gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
 
+
+
+--------------------------------
+cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+---------------------------------
+sysctl --system
+
+above cmd give me error but that's not an issue
+----------------------------------------------------------------------------------------------------------
+
+
 -----------------Install kubelet, kubeadm and kubectl, and enable kubelet to ensure it's automatically started on startup:---------
 
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+____________________________________________________________________________________________________________________________________________
+
 sudo systemctl enable --now kubelet
+
+sudo systemctl start kubelet
+------------------------------------------------------
+TILL HERE IT IS COMMAN FOR NODE & MASTER
+this is master 
+*************
+kubeadm init --apiserver-advertise-address=master ip address172. --pod-network-cidr=192.168.0.0/16
+
+
+
