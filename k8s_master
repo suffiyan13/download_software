@@ -53,6 +53,23 @@ sudo mkdir -p $HOME/.kube
 --------------------------
 checking nodes are present or not 
 kubectl get nodes 
+-------------------------------------------
+## below installs calico networking driver 
 
+   kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml
+*
+wait for some time here
+--------------------------------------
+to check how many pods we have 
 
+kubectl get pods --all-namespaces
+
+-------------------------------------------
+CREATING TOKEN TO PRINT IN NODE 
+
+kubeadm token create --print-join-command
+
+KNOW PRINT THE RESULT IN NODE 
+**************************************************
+INSTALLATION COMPLETE
 
