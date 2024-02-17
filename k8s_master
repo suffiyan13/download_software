@@ -46,5 +46,13 @@ this is master
 *************
 kubeadm init --apiserver-advertise-address=master ip address172. --pod-network-cidr=192.168.0.0/16
 
+------------------
+sudo mkdir -p $HOME/.kube
+   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   sudo chown $(id -u):$(id -g) $HOME/.kube/config
+--------------------------
+checking nodes are present or not 
+kubectl get nodes 
+
 
 
